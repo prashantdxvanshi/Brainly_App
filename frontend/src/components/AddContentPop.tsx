@@ -2,18 +2,25 @@ import Input from "./Input";
 import Crossicon from "../icons/Crossicon";
 import Button from "./Button";
 import { useRef, useState } from "react";
-import { BACKEND_URL } from "../config";
+
 import axios from "axios";
 import { toast } from "react-toastify";
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL;
 
-enum contentType{
-  YouTube = "youtube",
-  Twitter = "twitter"
+const ContentType = {
+  YouTube: "youtube",
+  Twitter: "twitter",
+} as const;
+
+type ContentType = (typeof ContentType)[keyof typeof ContentType];
+interface AddContentPopProps {
+  open: boolean;
+  onClose: () => void;
 }
-const AddContentPop =({ open, onClose }) => {
+const AddContentPop: React.FC<AddContentPopProps> = ({ open, onClose }) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
-  const [type, settype] = useState(contentType.YouTube);
+  const [type, settype] = useState<ContentType>(ContentType.YouTube);
   async function addContent() {
     const title = titleRef.current?.value;
     const link = linkRef.current?.value;
@@ -51,8 +58,8 @@ const AddContentPop =({ open, onClose }) => {
               <Input ref={linkRef} placeholder={"Link"}/>
               <div className="flex gap-4 p-3">
                
-                <Button onClick={()=>{settype(contentType.YouTube)}} content="YouTube" numbering={type===contentType.YouTube?"first":"second"}/>
-                <Button onClick={()=>{settype(contentType.Twitter)}} content="Twitter" numbering={type===contentType.Twitter?"first":"second"}/>
+                <Button onClick={()=>{settype(ContentType.YouTube)}} content="YouTube" numbering={type===ContentType.YouTube?"first":"second"}/>
+                <Button onClick={()=>{settype(ContentType.Twitter)}} content="Twitter" numbering={type===ContentType.Twitter?"first":"second"}/>
               </div>
                <div className="flex justify-center">
                 <Button onClick={addContent} numbering="first" content="Submit" />

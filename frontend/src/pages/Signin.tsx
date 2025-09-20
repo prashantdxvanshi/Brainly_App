@@ -2,7 +2,9 @@
 import { useRef } from "react";
 import Button from "../components/Button"
 import Input from "../components/Input"
-import { BACKEND_URL } from "../config";
+
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL;
+
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +15,7 @@ const Signin = () => {
  async function signin(){
     const username=usernameRef.current?.value;
     const password=passwordRef.current?.value;
-    
+    console.log("backend url is ",BACKEND_URL)
     const res=await axios.post(`${BACKEND_URL}`+"/user/signin",{username,password})
     sessionStorage.setItem("token",res.data.token)
     toast.success(res.data.message)

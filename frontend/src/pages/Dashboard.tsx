@@ -6,9 +6,10 @@ import Plusicon from "../icons/Plusicon"
 import Shareicon from "../icons/Shareicon"
 import Sidebar from "../components/Sidebar"
 import UseContent from "../hooks/UseContent"
-import { BACKEND_URL } from "../config"
+
 import axios from "axios"
 import { toast } from "react-toastify"
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL;
 
 
 
@@ -25,7 +26,7 @@ function Dashboard() {
      <Button onClick={()=>{setmodelOpen(true)}} numbering="first" content="Add content" icon={<Plusicon/>}/>
      <Button onClick={async()=>{
       const res=await axios.post(`${BACKEND_URL}/content/share`,{share:true},{headers: {token: sessionStorage.getItem("token"),},})
-     const shareurl=`http://localhost:5173/share/${res.data.hash}`
+     const shareurl=`${BACKEND_URL}/share/${res.data.hash}`
      toast.success(`this is your share url ${shareurl}`)
      }} numbering="second" content="Share Brain" icon={<Shareicon/>}/>
      </div>
