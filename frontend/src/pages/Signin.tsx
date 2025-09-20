@@ -16,7 +16,7 @@ const Signin = () => {
     const username=usernameRef.current?.value;
     const password=passwordRef.current?.value;
     console.log("backend url is ",BACKEND_URL)
-    const res=await axios.post(`${BACKEND_URL}`+"/user/signin",{username,password})
+    const res=await axios.post(`${BACKEND_URL}/user/signin`,{username,password})
     sessionStorage.setItem("token",res.data.token)
     toast.success(res.data.message)
     navigate("/dashboard")

@@ -16,7 +16,7 @@ const Signup =() => {
     const username=usernameRef.current?.value;
     const password=passwordRef.current?.value;
     
-    const res=await axios.post(`${BACKEND_URL}`+"/user/signup",{username,password})
+    const res=await axios.post(`${BACKEND_URL}/user/signup`,{username,password})
     navigate("/signin")
     toast.success(res.data.message)
   }

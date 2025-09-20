@@ -25,7 +25,7 @@ const AddContentPop: React.FC<AddContentPopProps> = ({ open, onClose }) => {
     const title = titleRef.current?.value;
     const link = linkRef.current?.value;
     console.log(title,link)
-    const res = await axios.post(`${BACKEND_URL}` + "/content/add", {
+    const res = await axios.post(`${BACKEND_URL}/content/add`, {
       title:title,
       link:link,
       type
