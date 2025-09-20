@@ -9,7 +9,7 @@ const Home = () => {
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{
         backgroundImage:
-          "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80')",
+          "url('https://dcassetcdn.com/design_img/4015668/1254515/29302081/nbq9v65f6s2bebgpqsgtbfsdh8_image.jpg')",
       }}
     >
       {/* Dark overlay */}
