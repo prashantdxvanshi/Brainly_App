@@ -9,7 +9,7 @@ import UseContent from "../hooks/UseContent"
 
 import axios from "axios"
 import { toast } from "react-toastify"
-const BACKEND_URL = import.meta.env.BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL;
 
 
 
