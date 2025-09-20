@@ -48,9 +48,9 @@ const AddContentPop: React.FC<AddContentPopProps> = ({ open, onClose }) => {
           <div className="w-screen h-screen fixed top-0 left-0 bg-slate-500 opacity-70 flex justify-center"></div>
           <div className="w-screen h-screen fixed top-0 left-0 items-center  flex justify-center">
             <div className="flex flex-col justify-center fixed opacity-100 p-4 ">
-            <span className="bg-white  rounded-2xl p-4">
+            <span className="bg-gradient-to-l via-gray-400 border-2 border-amber-50  rounded-2xl p-4">
               <div className="flex justify-end ">
-                <button onClick={onClose} className="cursor-pointer">
+                <button onClick={onClose} className="cursor-pointer text-white">
                     <Crossicon />
                 </button>
               </div>

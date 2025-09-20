@@ -21,8 +21,14 @@ const Signup =() => {
     toast.success(res.data.message)
   }
   return (
-    <div className="h-screen w-screen bg-gray-200 flex justify-center items-center">
-      <div className="bg-white rounded-xl border min-w-48 p-8">
+     <div
+      className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('https://markdivine.com/wp-content/uploads/2023/04/Gut-Brain-Axis-1568x1109.jpg')",
+      }}
+    >
+      <div className="bg-gradient-to-t via-blue-300 border-amber-50 rounded-xl border min-w-48 p-8">
         <Input ref={usernameRef} placeholder="Username"/>
         <Input ref={passwordRef} placeholder="Password"/>
         <div className="flex justify-center pt-4" >

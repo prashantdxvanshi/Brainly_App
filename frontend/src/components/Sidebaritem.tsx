@@ -8,7 +8,7 @@ interface sidebaritemprops{
 const Sidebaritem = ({text,icon}: sidebaritemprops) => {
   return (
     <div>
-      <div className="flex items-center py-2">
+      <div className="flex items-center py-4 text-white text-2xl">
         <div className="pr-2">{icon}</div>
         <div >{text}</div>
       </div>
