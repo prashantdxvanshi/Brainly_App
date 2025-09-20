@@ -17,13 +17,16 @@ app.use("/content",contentRoutes)
 
 
       
-
-
-app.listen(port,async()=>{
-     try{ await mongoose.connect(String(process.env.MONGODB_URL));
+// Connect MongoDB and start server
+async function main() {
+  try{ await mongoose.connect(String(process.env.MONGODB_URL));
         console.log("you are connected to cluster successfully")
      }catch(err){
         console.log("error in db connection is ",err)
      }
-    console.log("server is started at port ",port)
-})
+  const PORT = process.env.PORT || 4000;
+  
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+main();
+
