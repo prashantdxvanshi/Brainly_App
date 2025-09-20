@@ -3,7 +3,7 @@ import { useRef } from "react";
 import Button from "../components/Button"
 import Input from "../components/Input"
 
-const BACKEND_URL = import.meta.env.VITE_API_BASE_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 import axios from "axios";
 import { toast } from "react-toastify";
