@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Shareicon from "../icons/Shareicon";
 interface cardprops{
     title:string;
@@ -5,6 +6,26 @@ interface cardprops{
     type:"twitter" | "youtube"
 }
 const Card = ({title,link,type}: cardprops) => {
+
+    useEffect(() => {
+    if (type === "twitter" && (window as any).twttr?.widgets) {
+      (window as any).twttr.widgets.load();
+    }
+  }, [type, link]);
+
+  function getYouTubeEmbed(url: string) {
+  try {
+    const u = new URL(url);
+    if (u.hostname === "youtu.be") {
+      return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
+    }
+    if (u.searchParams.get("v")) {
+      return `https://www.youtube.com/embed/${u.searchParams.get("v")}`;
+    }
+  } catch {}
+  return url; // fallback
+}
+
   return (
     <div>
       <div className="bg-white rounded-md border border-gray-200 max-w-72 p-8 min-h-48 min-w-72">
@@ -25,7 +46,15 @@ const Card = ({title,link,type}: cardprops) => {
             </div>
           </div>
         </div>
-        {type==="youtube" && <iframe  className="w-full pt-2"  src={link.replace("watch","embed").replace("?v=","/")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
+        {type==="youtube" &&  <iframe
+    className="w-full pt-2"
+    src={getYouTubeEmbed(link)}
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  ></iframe>}
        
        {type==="twitter" && <blockquote className="twitter-tweet">
           <a href={link.replace("x.com","twitter.com")}></a>

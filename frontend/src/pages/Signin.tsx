@@ -1,5 +1,5 @@
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Button from "../components/Button"
 import Input from "../components/Input"
 
@@ -10,17 +10,27 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 const Signin = () => {
   const navigate=useNavigate();
+  const[loading,setloading]=useState(false);
   const usernameRef=useRef<HTMLInputElement>(null);
   const passwordRef=useRef<HTMLInputElement>(null);
  async function signin(){
+  setloading(true);
     const username=usernameRef.current?.value;
     const password=passwordRef.current?.value;
-    console.log("backend url is ",BACKEND_URL)
-    const res=await axios.post(`${BACKEND_URL}/user/signin`,{username,password})
-    sessionStorage.setItem("token",res.data.token)
-    toast.success(res.data.message)
-    navigate("/dashboard")
-
+     try{ 
+         const res=await axios.post(`${BACKEND_URL}/user/signin`,{username,password})
+         if(res.data.message==="signin success"){
+       sessionStorage.setItem("token",res.data.token)
+        toast.success(res.data.message)
+        navigate("/dashboard")
+         }else{
+        toast.error(res.data.message)
+         }
+          setloading(false);
+    }catch(err){
+        toast.error("something went wrong")
+    }
+   
   }
   return (
    <div

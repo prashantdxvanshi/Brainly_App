@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import Button from "../components/Button"
 import Input from "../components/Input"
 
@@ -10,15 +10,26 @@ import { useNavigate } from "react-router-dom";
 
 const Signup =() => {
   const navigate=useNavigate();
+  const[loading,setloading]=useState(false);
   const usernameRef=useRef<HTMLInputElement>(null);
   const passwordRef=useRef<HTMLInputElement>(null);
  async function signup(){
+    setloading(true);
     const username=usernameRef.current?.value;
     const password=passwordRef.current?.value;
+    try{ 
+        const res=await axios.post(`${BACKEND_URL}/user/signup`,{username,password})
+        if(res.data.message==="signed up success"){
+       navigate("/signin")
+        toast.success(res.data.message)
+        }else{
+        toast.error(res.data.message)
+        }
+        setloading(false);
+    }catch(err){
+        toast.error("something went wrong")
+    }
     
-    const res=await axios.post(`${BACKEND_URL}/user/signup`,{username,password})
-    navigate("/signin")
-    toast.success(res.data.message)
   }
   return (
      <div
@@ -32,7 +43,8 @@ const Signup =() => {
         <Input ref={usernameRef} placeholder="Username"/>
         <Input ref={passwordRef} placeholder="Password"/>
         <div className="flex justify-center pt-4" >
-            <Button onClick={signup} loading={false} numbering="first" content="Signup" fullWidth={true}/>
+          {loading?<Button onClick={signup} loading={false} numbering="first" content="Loading.." fullWidth={true}/>:<Button onClick={signup} loading={false} numbering="first" content="Signup" fullWidth={true}/>}
+            
         </div>
 
       </div>
