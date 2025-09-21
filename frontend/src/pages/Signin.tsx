@@ -44,7 +44,7 @@ const Signin = () => {
         <Input ref={usernameRef}  placeholder="Username"/>
         <Input ref={passwordRef}  placeholder="Password"/>
         <div className="flex justify-center pt-4" >
-            <Button onClick={signin} loading={false} numbering="first" content="Signin" fullWidth={true}/>
+          {loading?<Button onClick={signin} loading={false} numbering="first" content="Loading.." fullWidth={true}/>:<Button onClick={signin} loading={false} numbering="first" content="Signin" fullWidth={true}/>}
         </div>
 
       </div>
